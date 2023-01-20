@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script> <!-- Library that makes apllication become interactive-->
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script> <!-- React Element를 HTML body에 둘수있도록 하는 package-->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.querySelector('#root')
+    function MinutesToHours() {
+        const [amount, setAmount] = React.useState(0);
+        const [inverted, setInverted] = React.useState(false);
+
+        const onChange = (event) => {
+            setAmount(event.target.value);
+        };
+        const reset = () => {
+            setAmount(0);
+        }
+        const onFlip = () => setInverted((current) => !current); // Take current and return !current
+        return(
+            <div>
+                <div>
+                    <label htmlFor="minutes"> Minutes </label>
+                    <input 
+                    value={inverted? amount * 60 : amount} //input 을 어디서든 (외부에서) 바꿀수있다
+                    id="minutes"
+                    placeholder="Minutes" 
+                    type="number"
+                    disabled={inverted}
+                    onChange={onChange} //user wrtie on input
+                    />
+                </div>
+                <div>
+                    <label htmlFor="hours"> Hours </label>
+                    <input 
+                    value={inverted ? amount : amount/60} 
+                    id="hours" 
+                    placeholder="Hours" 
+                    type="number"
+                    disabled={!inverted}
+                    onChange={onChange} 
+                    />
+                </div>
+                <button onClick={reset}>Reset</button>
+                <button onClick={onFlip}> {!inverted? "Invert" : "Turn it back"}</button>
+            </div>
+        )
+    }
+    function KilloToMiles(){
+        const [distance, setDistance] = React.useState(0);
+        const [invert, setInvert] = React.useState(false);
+
+        const onChange = (event) => {
+            setDistance(event.target.value);
+        }
+        const reset = () => setDistance(0);
+        const onInvert = () => setInvert((current) => !current)
+
+        return (
+            <div>
+                <div>
+                    <label htmlFor="km"> Killo Meters </label>
+                    <input 
+                    value={invert? distance / 0.621371 : distance}
+                    type="number"
+                    id="km"
+                    onChange={onChange}
+                    disabled={invert}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="mile"> Miles </label>
+                    <input 
+                    value={invert? distance : distance * 0.621371}
+                    type="number"
+                    id="mile"
+                    onChange={onChange}
+                    disabled={!invert}
+                    />
+                </div>
+                <button onClick={reset}>Reset</button>
+                <button onClick={onInvert}> {!invert? "Invert" : "Swithc it back"}</button>
+            </div>
+        )
+    }
+    function App() {
+        const [index, setIndex] = React.useState("0");
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+        }
+        return (
+            <div>
+            <h1 className="header">Super Converter</h1>
+            <select value= {index} onChange={onSelect}>
+                <option value="0">Minutes & Hours</option>
+                <option value="1">Km & Miles</option> 
+            </select>
+            <hr />
+            {index === "0" ? <MinutesToHours /> : null}
+            {index === "1" ? <KilloToMiles /> : null}
+            </div>
+        )
+    }
+    ReactDOM.render(<App />, root) // Render means show it to the user
+</script>
+</html>

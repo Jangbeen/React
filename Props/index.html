@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script> <!-- Library that makes apllication become interactive-->
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script> <!-- React Element를 HTML body에 둘수있도록 하는 package-->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+<script type="text/babel">
+    function Btn ({ text = "Change", fontSize }) {
+        // console.log(props.text)
+        return <button
+        style ={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+            fontSize
+        }}
+        >
+        {text}
+        </button>
+    }
+    Btn.propTypes = {
+        text: PropTypes.string.isRequired,  // isRequired는 필수로 args를 요구한다
+        fontSize: PropTypes.number
+    }
+    function App() {
+        return( 
+            <div>
+                <Btn text="Save Changes" fontSize={18}/> {/* How to call Function Component inside of JSX */}
+                <Btn fontSize={"Confirm"}/>
+            </div>
+        )
+    }
+    const root = document.getElementById('root');
+    ReactDOM.render(<App />, root);
+</script>
+</html>
