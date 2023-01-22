@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import styles from "./App.module.css"
 
 function App() {
   const [toDo, setToDo] = useState("");
@@ -19,8 +20,8 @@ function App() {
     setToDos((currentArr) => currentArr.filter((_,curIndex) => curIndex !== index))
   }
   return (
-    <div>
-      <h1>To Do ({toDos.length})</h1>
+    <div className={styles.body}>
+      <h1 className={styles.head}>My To Do List ({toDos.length})</h1>
       <form onSubmit={onSubmit}>
       <input 
         value={toDo} 
