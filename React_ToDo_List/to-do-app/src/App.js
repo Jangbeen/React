@@ -23,19 +23,21 @@ function App() {
     <div className={styles.body}>
       <h1 className={styles.head}>My To Do List ({toDos.length})</h1>
       <form onSubmit={onSubmit}>
-      <input 
+      <input
+        className={styles.inputBox}
         value={toDo} 
         onChange={onChange} 
         type="text" 
         placeholder='Write your to do' />
-        <button>Add To Do</button>
+        <button className={styles.btn} >Add To Do</button>
       </form>
-      <hr />
-      <ul>
-        {toDos.map((item, index) =>
-          <li key={index}> {item} <button onClick={() => deleteClick(index)}>Delete</button></li>)
-        }
-      </ul>
+      <div className={styles.liBox}>
+        <ul className={styles.unorderList}>
+          {toDos.map((item, index) =>
+            <li key={index}> {item} <button onClick={() => deleteClick(index)}>Delete</button></li>)
+          }
+        </ul>
+      </div>
     </div>
   );
 }
