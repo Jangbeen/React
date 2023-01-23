@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import Movie from "../componenets/Movie"
+import Navbar from "../componenets/Navbar";
+import styles from "./Home.module.css"
 
 function Home() {
     const [loading,setLoading] = useState(true);
@@ -18,8 +20,10 @@ function Home() {
   
     return (
       <div>
-        {loading? <h1>Loading ... </h1> : 
-        <div>
+        {loading? <h1>Loading ... </h1> :
+
+        <div className={styles.basic}>
+          <Navbar />
           {movies.map((movie) => 
             <Movie
             key={movie.id} 
@@ -30,7 +34,8 @@ function Home() {
             genres={movie.genres}
             />
           )}    
-        </div>}
+        </div>   
+        }
       </div>
     );
 }
